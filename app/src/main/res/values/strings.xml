@@ -2,10 +2,10 @@
     <string name="app_name">Kao_hw03_ListView_Ex</string>
 
     <string-array name="city">
-        <item>Taipei</item>
-        <item>Taoyuan</item>
         <item>Tainan</item>
-        <item>Yilan</item>
+        <item>Taipei</item>
         <item>Taitung</item>
+        <item>Taoyuan</item>
+        <item>Yilan</item>
     </string-array>
 </resources>
