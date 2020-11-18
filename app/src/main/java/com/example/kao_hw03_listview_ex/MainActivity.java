@@ -3,6 +3,7 @@ package com.example.kao_hw03_listview_ex;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private Context context;
     private ListView listViewId;
-    private String[] cityName;
+    private String[] cityName, cityInfo;
     private int[] cityPic= {R.drawable.tainan, R.drawable.taipei, R.drawable.taitung,
                             R.drawable.taoyuan, R.drawable.yilan};
 
 //    private int[] cityIcon={R.drawable.icon_tainan, R.drawable.icon_taipei, R.drawable.icon_taitung,
 //                            R.drawable.icon_taoyuan, R.drawable.icon_yilan};
     private List<Map<String, Object>> itemList;
+//    Class<?>[] clz = {CityActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         //初始化
         listViewId = (ListView) findViewById(R.id.listView_id);
         setList();
-
     }
 
     //將cityName & cityPic放入Map後，再放入List內
@@ -50,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
         //get data
         itemList = new ArrayList<Map<String, Object>>();
         cityName = getResources().getStringArray(R.array.city);
-        Log.d(TAG, "setList: cityName = " +cityName);
+        cityInfo = getResources().getStringArray(R.array.info);
 
         //put data
         for (int i=0; i<cityName.length; i++){
             HashMap<String, Object> data = new HashMap<>();
             data.put("CITYNAME", cityName[i]);
             data.put("CITYPIC", cityPic[i]);
+            data.put("CITYINFO", cityInfo[i]);
 
             Log.d(TAG, "setList: CITYNAME = " +cityName);
             Log.d(TAG, "setList: CITYPIC = " +cityPic);
@@ -72,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "setAdaptor: ");
         //SimpleAdaptor
         SimpleAdapter adaptor = new SimpleAdapter(context, itemList, R.layout.city_layout,
-                new String[]{"CITYNAME", "CITYPIC"},
-                new int[]{R.id.textView_city, R.id.imageView_city});
+                new String[]{"CITYNAME", "CITYPIC", "CITYINFO"},
+                new int[]{R.id.textView_cityLayout, R.id.imageView_picLayout});
 
         listViewId.setAdapter(adaptor);
 
@@ -85,9 +87,20 @@ public class MainActivity extends AppCompatActivity {
         listViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
                 String name = (String) item.get("CITYNAME");
+                int pic = (int) item.get("CITYPIC");
+                String info = (String) item.get("CITYINFO");
+
+                Intent intent = new Intent(context, CityActivity.class);
+
+                intent.putExtra("CITYNAME", name);
+                intent.putExtra("CITYPIC", pic);
+                intent.putExtra("CITYINFO", info);
                 Log.d(TAG, "onItemClick: CITYNAME = " +name);
+
+                startActivity(intent);
                 Toast.makeText(context, "You selected : " + name, Toast.LENGTH_SHORT).show();
             }
         });
