@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private Context context;
     private ListView listViewId;
-    private String[] cityName, cityInfo;
+    private String[] cityName;
     private int[] cityPic= {R.drawable.tainan, R.drawable.taipei, R.drawable.taitung,
                             R.drawable.taoyuan, R.drawable.yilan};
 
-//    private int[] cityIcon={R.drawable.icon_tainan, R.drawable.icon_taipei, R.drawable.icon_taitung,
-//                            R.drawable.icon_taoyuan, R.drawable.icon_yilan};
     private List<Map<String, Object>> itemList;
-//    Class<?>[] clz = {CityActivity.class};
+    private String[] cityInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //將資料(itemList)放入Adaptor內
-    //再將adaptor給listView(listViewFood)
+    //再將adaptor給listView(listViewId)
     private void setAdaptor() {
         Log.d(TAG, "setAdaptor: ");
         //SimpleAdaptor
@@ -89,19 +87,18 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
-                String name = (String) item.get("CITYNAME");
-                int pic = (int) item.get("CITYPIC");
-                String info = (String) item.get("CITYINFO");
 
                 Intent intent = new Intent(context, CityActivity.class);
 
-                intent.putExtra("CITYNAME", name);
-                intent.putExtra("CITYPIC", pic);
-                intent.putExtra("CITYINFO", info);
-                Log.d(TAG, "onItemClick: CITYNAME = " +name);
+                intent.putExtra("CITYNAME", (String)(item.get("CITYNAME")));
+                intent.putExtra("CITYPIC", (int) item.get("CITYPIC"));
+                intent.putExtra("CITYINFO", (String) item.get("CITYINFO"));
+
+                Log.d(TAG, "onItemClick: CITYNAME = " +(String)(item.get("CITYNAME")));
+                Log.d(TAG, "onItemClick: CITYINFO = "+(String) item.get("CITYINFO"));
 
                 startActivity(intent);
-                Toast.makeText(context, "You selected : " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "You selected : " + (String)(item.get("CITYNAME")), Toast.LENGTH_SHORT).show();
             }
         });
     }

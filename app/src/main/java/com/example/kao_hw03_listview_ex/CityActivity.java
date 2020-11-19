@@ -12,6 +12,7 @@ public class CityActivity extends AppCompatActivity {
 
     private ImageView imageViewCity;
     private TextView textView;
+    private String TAG = "CityActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +28,13 @@ public class CityActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView_city);
 
         int pic = intent.getIntExtra("CITYPIC", 0);
-        int info = intent.getIntExtra("CITYINFO", 0);
-        String msg = getResources().getString(info);
-        
+        String info = intent.getStringExtra("CITYINFO");
+        Log.d(TAG, "onCreate: info = "+info);
+
+       // String msg = getResources().getString(Integer.parseInt(info));
+
         imageViewCity.setImageResource(pic);
-        textView.setText(msg);
+        textView.setText(info);
 
     }
 }
