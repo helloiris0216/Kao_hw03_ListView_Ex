@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setTheme(R.style.NightTheme);
         context = this;
-        setTitle("ListView_Ex");
+       // setTitle("ListView_Ex");
 
         //初始化
         listViewId = (ListView) findViewById(R.id.listView_id);
@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(context, CityActivity.class);
-
                 intent.putExtra("CITYNAME", (String)(item.get("CITYNAME")));
                 intent.putExtra("CITYPIC", (int) item.get("CITYPIC"));
                 intent.putExtra("CITYINFO", (String) item.get("CITYINFO"));

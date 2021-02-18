@@ -7,4 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NightTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorAccent">@color/blue_green</item>
+        <item name="android:textColorTertiary">@color/baby_blue</item>
+
+    </style>
+
 </resources>

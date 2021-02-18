@@ -25,13 +25,17 @@ public class CityActivity extends AppCompatActivity {
         Log.d("CityActivity", "onCreate: name = " +name);
 
         imageViewCity = (ImageView) findViewById(R.id.imageView_city);
+        //imageViewCity.getBackground().setAlpha(100);
+
         textView = (TextView) findViewById(R.id.textView_city);
+        textView.getBackground().setAlpha(200);
 
         int pic = intent.getIntExtra("CITYPIC", 0);
         String info = intent.getStringExtra("CITYINFO");
         Log.d(TAG, "onCreate: info = "+info);
 
        // String msg = getResources().getString(Integer.parseInt(info));
+
 
         imageViewCity.setImageResource(pic);
         textView.setText(info);
